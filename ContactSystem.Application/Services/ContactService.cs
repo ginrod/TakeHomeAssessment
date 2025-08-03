@@ -42,4 +42,8 @@ public class ContactService : IContactService
     {
         return await _contactsRepository.SearchContactsAsync(officeId, searchTerm, page, pageSize);
     }
+    public async Task<(IEnumerable<ContactEntity>, int)> SearchAllContactsInOfficeAsync(Guid officeId, int page, int pageSize)
+    {
+        return await _contactsRepository.SearchAllContactsInOfficeAsync(officeId, page, pageSize);
+    }
 }
