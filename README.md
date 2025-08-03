@@ -113,8 +113,8 @@ You may invert the startup order depending on what you want to test (API or UI).
 
 A walkthrough demo is available for both:
 
-- General users exploring the app. See the video [here](https://www.loom.com/share/3897053a5bc049d09bcde6284b0cbfa8)
+- General users exploring the app. See the video (comming soon*)
     
-- Developers reviewing the code. See the video [here](https://www.loom.com/share/e69bc5023c1f4b229da9d8bc06cf6c47)
+- Developers reviewing the code. See the video (comming soon*)
 
-You can test the deployed version of the app [here](azure deployment link)  
+You can test the deployed version of the app [here](https://contactsystemtakehomeassessmentclient-gqgxdrerayfxgfd0.northeurope-01.azurewebsites.net/) 
