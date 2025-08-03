@@ -16,7 +16,9 @@ public class ContactsRepository : EntityRepository<ContactEntity, Guid>, IContac
     public async Task<(IEnumerable<ContactEntity>, int)> SearchContactsAsync(Guid officeId, string searchTerm, int page, int pageSize)
     {
         var query = _dbSet
-            .Where(p => (p.FirstName.Contains(searchTerm) || p.LastName.Contains(searchTerm) || p.Email.Contains(searchTerm)) &&
+            .Where(p => (p.FirstName.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase)
+                      || p.LastName.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase)
+                      || p.Email.Contains(searchTerm, StringComparison.InvariantCultureIgnoreCase)) &&
                         p.ContactOffices.Any(ph => ph.OfficeId == officeId))
             .OrderBy(p => p.LastName)
             .ThenBy(p => p.FirstName);
