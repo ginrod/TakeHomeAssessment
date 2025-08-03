@@ -66,5 +66,42 @@ namespace Granite.Controllers.Contacts
                 (success: true, "Contacts retrieved successfully", contacts, contactsCount)
             );
         }
+
+        /// <summary>
+        /// Retrieves a the list of Contacts.
+        /// </summary>
+        /// <param name="page">The page number for pagination.</param>
+        /// <param name="pageSize">The number of records per page.</param>
+        /// <returns>A list of Contacts in the Office</returns>
+        /// <response code="200">Contacts retrieved successfully.</response>
+        /// <response code="500">If an internal server error occurs.</response>
+        [HttpGet("getAllContacts")]
+        [ProducesResponseType(typeof(ApiResponse<IEnumerable<ContactEntity>>), 200)]
+        [ProducesResponseType(typeof(ApiResponse<object>), 400)]
+        [ProducesResponseType(typeof(ApiResponse<object>), 500)]
+        [Produces("application/json")]
+        [MapToApiVersion("1.0")]
+        public async Task<IActionResult> GetAllContacts([FromQuery] string? officeId, [FromQuery] int page = 1, [FromQuery] int pageSize = 20)
+        {
+            if (string.IsNullOrWhiteSpace(officeId))
+            {
+                _logger.LogWarning("Please select a valid office before searching for contacts.");
+
+                return BadRequest(new ApiResponse<object>(false, "An office must be correctly selected", null));
+            }
+
+            if (!Guid.TryParse(officeId, out var officeGuid))
+            {
+                _logger.LogWarning("Invalid GUID format for OfficeId: {OfficeId}", officeId);
+
+                return BadRequest(new ApiResponse<object>(false, "The selected office is not valid. Please try again.", null));
+            }
+
+            var (contacts, contactsCount) = await _contactService.SearchAllContactsInOfficeAsync(officeGuid, page, pageSize);
+
+            return Ok(new ApiResponse<IEnumerable<ContactEntity>>
+                (success: true, "Contacts retrieved successfully", contacts, contactsCount)
+            );
+        }
     }
 }

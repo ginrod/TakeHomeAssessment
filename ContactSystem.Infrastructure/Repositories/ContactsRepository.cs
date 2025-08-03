@@ -29,4 +29,20 @@ public class ContactsRepository : EntityRepository<ContactEntity, Guid>, IContac
 
         return (Contacts, totalRecords);
     }
+
+    public async Task<(IEnumerable<ContactEntity>, int)> SearchAllContactsInOfficeAsync(Guid officeId, int page, int pageSize)
+    {
+        var query = _dbSet
+            .Where(p => p.ContactOffices.Any(ph => ph.OfficeId == officeId))
+            .OrderBy(p => p.LastName)
+            .ThenBy(p => p.FirstName);
+
+        var totalRecords = await query.CountAsync();
+        var Contacts = await query
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (Contacts, totalRecords);
+    }
 }

@@ -10,4 +10,5 @@ public interface IContactService
     Task UpdateContactAsync(ContactEntity contact);
     Task DeleteContactAsync(Guid id);
     Task<(IEnumerable<ContactEntity>, int)> SearchContactsAsync(Guid officeId, string searchTerm, int page, int pageSize);
+    Task<(IEnumerable<ContactEntity>, int)> SearchAllContactsInOfficeAsync(Guid officeId, int page, int pageSize);
 }
