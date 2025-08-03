@@ -22,7 +22,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddScoped<IContactsRepository, ContactsRepository>();
+builder.Services.AddScoped<IOfficesRepository, OfficesRepository>();
 builder.Services.AddScoped<IContactsRepository, ContactsRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IOfficeService, OfficeService>();
