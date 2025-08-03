@@ -113,7 +113,7 @@ You may invert the startup order depending on what you want to test (API or UI).
 
 A walkthrough demo is available for both:
 
-- General users exploring the app. See the video (comming soon*)
+- General users exploring the app. See the video [here](https://www.loom.com/share/554a75c8684f4bf2ba29cee44573fd2d)
     
 - Developers reviewing the code. See the video (comming soon*)
 
