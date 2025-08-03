@@ -115,6 +115,6 @@ A walkthrough demo is available for both:
 
 - General users exploring the app. See the video [here](https://www.loom.com/share/554a75c8684f4bf2ba29cee44573fd2d)
     
-- Developers reviewing the code. See the video (comming soon*)
+- Developers reviewing the code. See the video [here](https://www.loom.com/share/cc109e7a45ee410a8f751f5e2b966d68)
 
 You can test the deployed version of the app [here](https://contactsystemtakehomeassessmentclient-gqgxdrerayfxgfd0.northeurope-01.azurewebsites.net/) 
