@@ -4,42 +4,42 @@ using ContactSystem.Application.Services.Interfaces;
 
 namespace ContactSystem.Application.Services;
 
-public class ContactsService : IContactsService
+public class ContactService : IContactService
 {
-    private readonly IContactsRepository _ContactsRepository;
+    private readonly IContactsRepository _contactsRepository;
 
-    public ContactsService(IContactsRepository ContactRepository)
+    public ContactService(IContactsRepository ContactRepository)
     {
-        _ContactsRepository = ContactRepository;
+        _contactsRepository = ContactRepository;
     }
 
     public async Task<ContactEntity> GetContactByIdAsync(Guid id)
     {
-        return await _ContactsRepository.GetByIdAsync(id);
+        return await _contactsRepository.GetByIdAsync(id);
     }
 
     public async Task<IEnumerable<ContactEntity>> GetAllContactsAsync()
     {
-        return await _ContactsRepository.GetAllAsync();
+        return await _contactsRepository.GetAllAsync();
     }
 
     public async Task AddContactAsync(ContactEntity Contact)
     {
-        await _ContactsRepository.AddAsync(Contact);
+        await _contactsRepository.AddAsync(Contact);
     }
 
     public async Task UpdateContactAsync(ContactEntity Contact)
     {
-        await _ContactsRepository.UpdateAsync(Contact);
+        await _contactsRepository.UpdateAsync(Contact);
     }
 
     public async Task DeleteContactAsync(Guid id)
     {
-        await _ContactsRepository.DeleteAsync(id);
+        await _contactsRepository.DeleteAsync(id);
     }
 
     public async Task<(IEnumerable<ContactEntity>, int)> SearchContactsAsync(Guid officeId, string searchTerm, int page, int pageSize)
     {
-        return await _ContactsRepository.SearchContactsAsync(officeId, searchTerm, page, pageSize);
+        return await _contactsRepository.SearchContactsAsync(officeId, searchTerm, page, pageSize);
     }
 }

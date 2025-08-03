@@ -2,7 +2,7 @@ using ContactSystem.Application.Entities;
 
 namespace ContactSystem.Application.Services.Interfaces;
 
-public interface IContactsService
+public interface IContactService
 {
     Task<ContactEntity> GetContactByIdAsync(Guid id);
     Task<IEnumerable<ContactEntity>> GetAllContactsAsync();

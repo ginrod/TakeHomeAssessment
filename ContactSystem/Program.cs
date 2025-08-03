@@ -22,10 +22,10 @@ builder.Services.AddCors(options =>
         });
 });
 
-
+builder.Services.AddScoped<IOfficesRepository, OfficesRepository>();
 builder.Services.AddScoped<IContactsRepository, ContactsRepository>();
-builder.Services.AddScoped<IContactsService, ContactsService>();
-builder.Services.AddScoped<IOfficesService, OfficeService>();
+builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IOfficeService, OfficeService>();
 
 
 builder.Services.AddDbContext<GraniteDataContext>(options =>

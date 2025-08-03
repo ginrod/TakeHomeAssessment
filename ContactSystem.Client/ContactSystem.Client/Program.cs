@@ -1,7 +1,16 @@
+using ContactSystem.Client.Configuration;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.Configure<ApiSettings>(
+    builder.Configuration.GetSection("ApiSettings"));
+
+builder.Services.AddSingleton(resolver =>
+    resolver.GetRequiredService<IOptions<ApiSettings>>().Value);
 
 var app = builder.Build();
 
@@ -21,5 +30,12 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+// Redirect to Offices selection page
+app.Map("/", context =>
+{
+    context.Response.Redirect("/Offices");
+    return Task.CompletedTask;
+});
 
 app.Run();

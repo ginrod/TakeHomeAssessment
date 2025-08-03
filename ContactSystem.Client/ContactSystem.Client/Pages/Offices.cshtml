@@ -1,0 +1,17 @@
+﻿@page
+
+@inject Configuration.ApiSettings ApiSettings
+
+@{
+    ViewData["Title"] = "Offices";
+}
+
+<div class="container text-center mt-5">
+    <h2>Select an office</h2>
+
+    <select id="officesDropdown" class="form-select w-50 mx-auto mt-3" data-api="@ApiSettings.BaseUrl">
+        <option value="">--Select Office--</option>
+    </select>
+    <div id="errorMessage" style="color: red; margin-top: 1em;"></div>
+</div>
+<script src="~/js/offices.js"></script>
