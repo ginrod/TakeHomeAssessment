@@ -75,4 +75,80 @@ public class GraniteDataContext : DbContext, IGraniteDataContext
                     OfficeId = new Guid("9ca78c33-4590-43c1-a7c4-55696a5efd44"),
                 });
     }
+
+    // Basic Code to add more sample data
+    // It creates 5 Random Offices and 20 random Contacts
+    // 1 Office representing to Continuum and
+    // 1 Office representing Granite organizations are created
+    // 10 of the contacts are related to Continuum and the other to both Granite and Continuum
+    public void SeedInitialData()
+    {
+        var offices = new List<OfficeEntity>();
+        var contacts = new List<ContactEntity>();
+
+        for (int i = 1; i <= 5; ++i)
+        {
+            var office = new OfficeEntity
+            {
+                Id = Guid.NewGuid(),
+                Name = $"Office {i}"
+            };
+
+            offices.Add(office);
+        }
+
+        var granite = new OfficeEntity
+        {
+            Id = Guid.NewGuid(),
+            Name = "Granite Group"
+        };
+
+        var continuum = new OfficeEntity
+        {
+            Id = Guid.NewGuid(),
+            Name = "Continuum"
+        };
+
+        offices.Add(granite);
+        offices.Add(continuum);
+
+        for (int i = 0; i < 10; ++i)
+        {
+            var contact = new ContactEntity
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Continuum-Test",
+                LastName = $"Contact-{i}"
+            };
+
+            contact.Email = $"{contact.FirstName.ToLower()}.{contact.LastName.ToLower()}@wearecontinuum.com";
+
+            contact.ContactOffices = [
+                new() { OfficeId = granite.Id, ContactId = contact.Id },
+                new() { OfficeId = continuum.Id, ContactId = contact.Id },
+            ];
+
+            contacts.Add(contact);
+        }
+
+        for (int i = 0; i < 10; ++i)
+        {
+            var contact = new ContactEntity
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Granite-Test",
+                LastName = $"Contact-{i}",
+            };
+
+            contact.Email = $"{contact.FirstName.ToLower()}.{contact.LastName.ToLower()}@granite.ie";
+            contact.ContactOffices = [
+                new() { OfficeId = granite.Id, ContactId = contact.Id },
+            ];
+
+            contacts.Add(contact);
+        }
+
+        this.Offices.AddRange(offices);
+        this.Contacts.AddRange(contacts);
+    }
 }
