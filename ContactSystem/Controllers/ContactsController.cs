@@ -74,6 +74,7 @@ namespace Granite.Controllers.Contacts
         /// <param name="pageSize">The number of records per page.</param>
         /// <returns>A list of Contacts in the Office</returns>
         /// <response code="200">Contacts retrieved successfully.</response>
+        /// <response code="400">If an officeId is missing or is and invalid GUID.</response>
         /// <response code="500">If an internal server error occurs.</response>
         [HttpGet("getAllContacts")]
         [ProducesResponseType(typeof(ApiResponse<IEnumerable<ContactEntity>>), 200)]
