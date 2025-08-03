@@ -14,12 +14,13 @@ namespace Granite.Controllers.Contacts
     public class ContactsController : ControllerBase
     {
         private readonly IContactService _contactService;
-        private readonly IOfficeService _officeService;
+        private readonly ILogger<ContactsController> _logger;
 
-        public ContactsController(IContactService contactService, OfficeService officeService)
+
+        public ContactsController(IContactService contactService, ILogger<ContactsController> logger)
         {
             _contactService = contactService;
-            _officeService = officeService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -38,15 +39,32 @@ namespace Granite.Controllers.Contacts
         [ProducesResponseType(typeof(ApiResponse<object>), 500)]
         [Produces("application/json")]
         [MapToApiVersion("1.0")]
-        public async Task<IActionResult> GetContacts([FromQuery] string name, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetContacts([FromQuery] string? officeId, [FromQuery] string name, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 return BadRequest(new ApiResponse<object>(false, "Search term cannot be empty.", null));
             }
 
-            //To Do
-            return Ok();
+            if (string.IsNullOrWhiteSpace(officeId))
+            {
+                _logger.LogWarning("Please select a valid office before searching for contacts.");
+
+                return BadRequest(new ApiResponse<object>(false, "An office must be correctly selected", null));
+            }
+
+            if (!Guid.TryParse(officeId, out var officeGuid))
+            {
+                _logger.LogWarning("Invalid GUID format for OfficeId: {OfficeId}", officeId);
+
+                return BadRequest(new ApiResponse<object>(false, "The selected office is not valid. Please try again.", null));
+            }
+
+            var (contacts, contactsCount) = await _contactService.SearchContactsAsync(officeGuid, name, page, pageSize);
+
+            return Ok(new ApiResponse<IEnumerable<ContactEntity>>
+                (success: true, "Contacts retrieved successfully", contacts, contactsCount)
+            );
         }
     }
 }
