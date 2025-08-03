@@ -81,7 +81,7 @@ The current implementation includes **basic error handling in the UI**, mostly w
 
 To streamline development and ensure reliability:
 
-- I would write **CI/CD scripts** (GitHub Actions or Azure DevOps Pipelines) to:
+- I would write **CI/CD scripts** (GitHub Actions) to:
     
     - Automatically build and test the solution on every pull request.
         
