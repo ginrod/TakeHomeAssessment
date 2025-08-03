@@ -2,7 +2,7 @@
 
 namespace ContactSystem.Application.Services.Interfaces
 {
-    public interface IOfficesService
+    public interface IOfficeService
     {
         Guid CurrentOfficeId { get; set; }
 

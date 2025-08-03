@@ -4,7 +4,7 @@ using ContactSystem.Application.Services.Interfaces;
 
 namespace ContactSystem.Application.Services
 {
-    public class OfficeService : IOfficesService
+    public class OfficeService : IOfficeService
     {
         public Guid CurrentOfficeId { get; set; }
 

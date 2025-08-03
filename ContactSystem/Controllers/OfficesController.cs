@@ -13,9 +13,9 @@ namespace Granite.Controllers.Contacts
     [ApiVersion("1.0")]
     public class OfficesController : ControllerBase
     {
-        private readonly IOfficesService _officeService;
+        private readonly IOfficeService _officeService;
 
-        public OfficesController(IOfficesService officeService)
+        public OfficesController(IOfficeService officeService)
         {
             _officeService = officeService;
         }

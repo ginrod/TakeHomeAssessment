@@ -13,12 +13,12 @@ namespace Granite.Controllers.Contacts
     [ApiVersion("1.0")]
     public class ContactsController : ControllerBase
     {
-        private readonly IContactsService _ContactsService;
-        private readonly IOfficesService _officeService;
+        private readonly IContactService _contactService;
+        private readonly IOfficeService _officeService;
 
-        public ContactsController(IContactsService ContactsService, OfficeService officeService)
+        public ContactsController(IContactService contactService, OfficeService officeService)
         {
-            _ContactsService = ContactsService;
+            _contactService = contactService;
             _officeService = officeService;
         }
 
