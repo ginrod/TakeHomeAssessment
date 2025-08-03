@@ -103,14 +103,26 @@ using (var serviceScope = app.Services.CreateScope())
             }
         }
     });
+
     dbContext.Contacts.Add(
         new ContactEntity
         {
             Id = new Guid("1ec2d3f7-8aa8-4bf5-91b8-045378919049"),
             FirstName = "Mark",
             LastName = "Costello",
-            Email = "mcostello@gmail.com"
+            Email = "mcostello@gmail.com",
+            ContactOffices = new List<ContactOfficeRelation>
+            {
+                new()
+                {
+                    ContactId = new Guid("1ec2d3f7-8aa8-4bf5-91b8-045378919049"),
+                    OfficeId = new Guid("ff0c022e-1aff-4ad8-2231-08db0378ac98"),
+                }
+            }
         });
+
+    // Add more sample data
+    dbContext.SeedInitialData();
 
     dbContext.SaveChanges();
 }
